@@ -1,0 +1,12 @@
+#!/bin/bash
+
+processes=$(ps -ef | grep "gbmon.py" | grep -v grep | grep -v gedit|  awk '{print $2}')
+
+if [ -z "$processes" ]
+then
+	exit 1
+
+else
+	echo $processes| xargs kill
+
+fi

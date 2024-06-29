@@ -1,0 +1,55 @@
+#!/bin/bash
+
+x=1
+f=0
+
+if [ $# -eq 0 ] 
+then 
+	echo "Path to png files not provided"
+	exit 1
+fi
+
+dir="$1"
+
+while [ $x -eq 1 ]
+do
+	if ls ${dir}/main_plot.png* 1> /dev/null 2>&1	
+	then	
+		f=0
+		latest_main_plot=$(ls -tr ${dir}/main_plot.png* | tail -n 1) 
+
+		if [ "$latest_main_plot" = "$prev_main_plot" ]
+		then continue
+		fi
+
+		#echo "${latest_main_plot}"
+		
+: '
+		p=$(ps -ef | grep "eog main_plot.png" | grep -v grep)
+		if [ -z "$p" ]  
+		then 
+			: #continue	
+
+		else 
+			echo "$p"| awk '{print $2}'| xargs kill
+	
+		fi	
+'	
+		eog -w "${latest_main_plot}" #2> err.txt #2>&1 &
+
+		prev_main_plot=$latest_main_plot
+
+	else 
+		if [ $f -eq 0 ] 
+		then 
+			#echo "No main plot png file found. Waiting.."
+			f=1
+		fi
+
+	fi
+
+	sleep 1
+
+done
+
+
