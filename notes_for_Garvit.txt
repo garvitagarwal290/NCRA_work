@@ -1,0 +1,78 @@
+
+ssh -X gpuuser@gwbh7.gmrt.ncra.tifr.res.in   (pwd is gmrt123)
+
+source /common-h10/gpuuser/pulsar/packages/scripts/presto_old_yg.bash
+
+[gpuuser@gwbh7 ~]$ which gptool
+/common-h10/gpuuser/pulsar/packages/gptool_ver4.3.6/gptool
+
+[gpuuser@gwbh7 ~]$ /common-h10/gpuuser/pulsar/packages/gptool_ver4.0_shm/gptool 
+
+[gpuuser@gwbh7 ~]$ /common-h10/gpuuser/pulsar/packages/gptool_ver4.0_shm/gptool -r -shmID 1 
+
+[gpuuser@gwbh7 gptool_realtime_test]$ pwd
+/home/gpuuser/ygupta/gptool_realtime_test
+ 
+to check shared memory : 
+[gpuuser@gwbh7 gptool_realtime_test]$ ipcs
+
+----------------------------------------
+
+Control Room no - (0213225)8324 
+Security no - *8/ (0213225)8300
+Sanjay sir - 9464. Gmrt no 8335
+Aditya (room)- 9546 (office)- 9458
+Harshwardhan (backend) - 8365
+
+Control Room - Sriram, Surinder, Shilpa, Nilesh, pramod, sachin, deepak
+others - sanjay, yogender, santaji sir
+
+
+---------------------------------------
+open 'data monitoring console' by: log in to h6 as gpu user. open dasmon.pl
+-----------------------------------------------
+
+in h7: /home/gpuuser/GWB/release/bin the file read_shm_hdr has the parameters
+	
+use - ./read_shm_hdr1 -c [GTAC code]
+
+--------------------------------------------------
+
+ssh gwbh6 /home/gpuuser/GWB/release/bin/get_gtac_code
+
+Active scans are numbered as 0, 1, 2 like that if there are multiple..
+if only one scan it's ID is 0..
+
+when you get multiple codes, then you have to decide which one to take..
+
+-----------------------------
+
+sudo python setup.py install (commond to install the shm library inside it directory)
+
+----------------------------
+
+log files are in /tmp/ directory
+
+-------------------------------
+in pulsar/packages dir, gptool_ver4.5 and 4.5.1 were copied from ver4.3.6 and 4.5.2 was copied from 4.4.5. ver4.5 doesnt attach on shm while 4.5.1 does.
+
+07/1/22 copied ver4.5.1 to 4.3.6_gbmon. changes made in gptool code are in this new version now.
+
+---------------------------------------
+to open image-> eog <image>
+
+g++ lib/libplot.cpp -o lib/libplot.o -I -fPIC -c -g -w  -I/misc/common-h10/gpuuser/pulsar/packages/gptool_ver4.5.1/include/   -I/common-h10/gpuuser/pulsar/packages/pgplot [to compile the libplot library]
+
+after this i have to do 'make' also
+----------------------------------------
+
+vncviewer -via student localhost:1
+
+password: Gag@2021
+
+jyeshtha pwd: ncra.123
+host machines pwd: gmrt123
+---------------------------------------
+
+
+
